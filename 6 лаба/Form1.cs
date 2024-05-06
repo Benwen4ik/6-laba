@@ -324,9 +324,9 @@ namespace _6_лаба
             if (richTextBox1.Text.Length == 0)
             {
                 //  if (comboBox2.Items.Count != 0) lastColor = listfont.Last().color;
-                listfont.Clear();
-                combobox2 = 0;
-                comboBox2.Items.Clear();
+              //  listfont.Clear();
+               // combobox2 = 0;
+               // comboBox2.Items.Clear();
                 ChangedParam(lastFont, lastColor);
                 richTextBox1.SelectionFont = lastFont;
                 richTextBox1.SelectionColor = lastColor;
