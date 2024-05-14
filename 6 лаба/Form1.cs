@@ -839,7 +839,12 @@ namespace _6_лаба
                     }
                     if (SizeTextBox.Text.Length != 0 && SizecomboBox.SelectedIndex != -1)
                     {
-                        string oper = "";
+                        if (Convert.ToInt32(SizeTextBox.Text) < 9 || Convert.ToInt32(SizeTextBox.Text) > 45)
+                        {
+                            MessageBox.Show(textBox1, "Допустимые значение размера шрифта 9-45");
+                            return;
+                        }
+                        // string oper = "";
                         string str = "( [id] = '10000' ";
                         DataTable dataTable = getTableBySize();
                         if (SizecomboBox.SelectedIndex == 0) {
