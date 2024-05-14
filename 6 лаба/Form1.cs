@@ -47,7 +47,7 @@ namespace _6_лаба
 
         string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=.;Extended Properties=text";
         string filePath = "Fonts.txt";
-        string firstLine = "id,FontFamily,Size,FontStyle,Color";
+        string firstLine = "id,FontFamily,FontSize,FontStyle,Color";
 
         public Form1()
         {
@@ -96,14 +96,14 @@ namespace _6_лаба
                         System.Console.WriteLine("Файл уже существует и содержит нужную строку.");
                     }
                 }
-                OleDbDataAdapter dataAdapter = new OleDbDataAdapter("SELECT id,FontFamily,Size,FontStyle,Color FROM "+ filePath, connection);
+                OleDbDataAdapter dataAdapter = new OleDbDataAdapter("SELECT id,FontFamily,FontSize,FontStyle,Color FROM "+ filePath, connection);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
                 foreach (DataRow dr in dataTable.Rows)
                 {
                     CustomFont customFont = new CustomFont();
                     customFont.fontFamily = dr["FontFamily"].ToString();
-                    customFont.size = Convert.ToInt32(dr["Size"]);
+                    customFont.size = Convert.ToInt32(dr["FontSize"]);
                     // FontConverter fontConverter = new FontConverter();
                     customFont.fontStyle = (FontStyle)Enum.Parse(typeof(FontStyle), (dr["FontStyle"].ToString()));
 
@@ -487,7 +487,7 @@ namespace _6_лаба
                             connection.Open();
                             OleDbCommand myOleDbCommand = connection.CreateCommand();
                             myOleDbCommand.CommandText =
-                                    @" INSERT INTO "+ filePath + @" ([id],[FontFamily], [Size], [FontStyle], [Color] ) 
+                                    @" INSERT INTO "+ filePath + @" ([id],[FontFamily], [FontSize], [FontStyle], [Color] ) 
                                         VALUES (@param0 ,@param1, @param2, @param3, @param4 ); " ;
                             myOleDbCommand.Parameters.AddWithValue("@param0", combobox2);
                             myOleDbCommand.Parameters.AddWithValue("@param1", richTextBox1.SelectionFont.FontFamily.Name);
@@ -638,7 +638,7 @@ namespace _6_лаба
                     connection.Open();
                     OleDbCommand myOleDbCommand = connection.CreateCommand();
                     myOleDbCommand.CommandText =
-                        "SELECT [id],[FontFamily], [Size], [FontStyle], [Color] " +
+                        "SELECT [id],[FontFamily], [FontSize], [FontStyle], [Color] " +
                         "FROM "+ filePath;
                     DataTable dateFont  = createDataTable("Font", myOleDbCommand);
                     connection.Close();
@@ -648,7 +648,7 @@ namespace _6_лаба
                     {
                         CustomFont customFont = new CustomFont();
                         customFont.fontFamily = dr["FontFamily"].ToString();
-                        customFont.size = Convert.ToInt32(dr["Size"]);
+                        customFont.size = Convert.ToInt32(dr["FontSize"]);
                        // FontConverter fontConverter = new FontConverter();
                         customFont.fontStyle = (FontStyle)Enum.Parse(typeof(FontStyle), ( dr["FontStyle"].ToString()) );
 
@@ -731,7 +731,7 @@ namespace _6_лаба
                     {
                         OleDbCommand myOleDbCommand = connection.CreateCommand();
                         myOleDbCommand.CommandText =
-                            @" INSERT INTO " + filePath + @" ([id],[FontFamily], [Size], [FontStyle], [Color] ) 
+                            @" INSERT INTO " + filePath + @" ([id],[FontFamily], [FontSize], [FontStyle], [Color] ) 
                                         VALUES (@param0 ,@param1, @param2, @param3, @param4 ); ";
                         myOleDbCommand.Parameters.AddWithValue("@param0", cf.id);
                         myOleDbCommand.Parameters.AddWithValue("@param1", cf.fontFamily);
@@ -839,8 +839,33 @@ namespace _6_лаба
                     }
                     if (SizeTextBox.Text.Length != 0 && SizecomboBox.SelectedIndex != -1)
                     {
-                        string oper = SizecomboBox.SelectedItem.ToString();
-                        filter += " [Size] " + oper + " '" + SizeTextBox.Text + "' AND ";
+                        string oper = "";
+                        string str = "( [id] = '10000' ";
+                        DataTable dataTable = getTableBySize();
+                        if (SizecomboBox.SelectedIndex == 0) {
+                            foreach (DataRow dr in dataTable.Rows)
+                            {
+                                if (Convert.ToInt32(dr["FontSize"]) == Convert.ToInt32(SizeTextBox.Text)) str += " OR [id]='" + dr["id"] + "'";
+                            }
+                        }
+                        if (SizecomboBox.SelectedIndex == 1)
+                        {
+                            foreach (DataRow dr in dataTable.Rows)
+                            {
+                                if (Convert.ToInt32(dr["FontSize"]) > Convert.ToInt32(SizeTextBox.Text)) str += " OR [id]='" + dr["id"] + "'";
+                            }
+                        }
+                        if (SizecomboBox.SelectedIndex == 2)
+                        {
+                            foreach (DataRow dr in dataTable.Rows)
+                            {
+                                if (Convert.ToInt32(dr["FontSize"]) < Convert.ToInt32(SizeTextBox.Text)) str += " OR [id]='" + dr["id"] + "'";
+                            }
+                        }
+                        str += ")";
+                        // string oper = SizecomboBox.SelectedItem.ToString();
+                        filter += str + " AND ";
+                       // filter += " [FontSize] " + oper + "'" + SizeTextBox.Text + "' AND ";
                     }
                     int style = 0;
                     if (BoltcheckBox1.Checked)
@@ -854,7 +879,7 @@ namespace _6_лаба
                         filter += " AND [Color]='" + FilterColor + "'";
                     } 
                     myOleDbCommand.CommandText =
-                        "SELECT [id],[FontFamily], [Size], [FontStyle], [Color] " +
+                        "SELECT [id],[FontFamily], [FontSize], [FontStyle], [Color] " +
                         "FROM " + filePath + " WHERE " + filter;
                     DataTable dateFont = createDataTable("Font00", myOleDbCommand);
                     connection.Close();
@@ -864,7 +889,7 @@ namespace _6_лаба
                     {
                         CustomFont customFont = new CustomFont();
                         customFont.fontFamily = dr["FontFamily"].ToString();
-                        customFont.size = Convert.ToInt32(dr["Size"]);
+                        customFont.size = Convert.ToInt32(dr["FontSize"]);
                         // FontConverter fontConverter = new FontConverter();
                         customFont.fontStyle = (FontStyle)Enum.Parse(typeof(FontStyle), (dr["FontStyle"].ToString()));
 
@@ -882,6 +907,31 @@ namespace _6_лаба
             catch (Exception exp)
             {
                 MessageBox.Show("Error " + exp.Message);
+            }
+        }
+
+        private DataTable getTableBySize()
+        {
+            try
+            {
+                using (OleDbConnection connection = new OleDbConnection(connectionString))
+                {
+                    connection.Open();
+                    OleDbCommand myOleDbCommand = connection.CreateCommand();
+                    myOleDbCommand.CommandText =
+                        "SELECT [id], [FontSize]" +
+                        "FROM " + filePath;
+                    DataTable dateFont = createDataTable("Font", myOleDbCommand);
+                    connection.Close();
+                    //    listfont.Clear();
+                    //     comboBox2.Items.Clear();
+                    return dateFont;
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error " + exp.Message);
+                return null;
             }
         }
 
