@@ -31,7 +31,16 @@ namespace _6_лаба
             this.fontStyle = fontStyle;
         }
 
-        public CustomFont(String fontFamily, float size, FontStyle fontStyle, Color color)
+        public CustomFont(int id,String fontFamily, float size, FontStyle fontStyle, Color color)
+        {
+            this.fontFamily = fontFamily;
+            this.size = size;
+            this.fontStyle = fontStyle;
+            this.color = color;
+            this.id = id;
+        }
+
+        public CustomFont( String fontFamily, float size, FontStyle fontStyle, Color color)
         {
             this.fontFamily = fontFamily;
             this.size = size;

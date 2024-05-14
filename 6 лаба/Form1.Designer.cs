@@ -45,13 +45,20 @@ namespace _6_лаба
             this.button4 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboText = new System.Windows.Forms.ComboBox();
             this.deletefontButton = new System.Windows.Forms.Button();
+            this.FamilyTextBox = new System.Windows.Forms.TextBox();
+            this.SizeTextBox = new System.Windows.Forms.TextBox();
+            this.SizecomboBox = new System.Windows.Forms.ComboBox();
+            this.BoltcheckBox1 = new System.Windows.Forms.CheckBox();
+            this.ItaliancheckBox2 = new System.Windows.Forms.CheckBox();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.ColorButton = new System.Windows.Forms.Button();
+            this.FilterButton = new System.Windows.Forms.Button();
+            this.ClearFilterButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.deleteTextButton = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -187,28 +194,6 @@ namespace _6_лаба
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(600, 253);
-            this.button8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(151, 29);
-            this.button8.TabIndex = 20;
-            this.button8.Text = "Сохранение текста";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(600, 286);
-            this.button9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(152, 29);
-            this.button9.TabIndex = 21;
-            this.button9.Text = "Выбор текста";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -217,14 +202,6 @@ namespace _6_лаба
             this.label4.Size = new System.Drawing.Size(50, 20);
             this.label4.TabIndex = 22;
             this.label4.Text = "Стили";
-            // 
-            // comboText
-            // 
-            this.comboText.FormattingEnabled = true;
-            this.comboText.Location = new System.Drawing.Point(600, 210);
-            this.comboText.Name = "comboText";
-            this.comboText.Size = new System.Drawing.Size(151, 28);
-            this.comboText.TabIndex = 23;
             // 
             // deletefontButton
             // 
@@ -236,24 +213,104 @@ namespace _6_лаба
             this.deletefontButton.UseVisualStyleBackColor = true;
             this.deletefontButton.Click += new System.EventHandler(this.deletefontButton_Click);
             // 
+            // FamilyTextBox
+            // 
+            this.FamilyTextBox.Location = new System.Drawing.Point(648, 194);
+            this.FamilyTextBox.Name = "FamilyTextBox";
+            this.FamilyTextBox.Size = new System.Drawing.Size(100, 27);
+            this.FamilyTextBox.TabIndex = 25;
+            // 
+            // SizeTextBox
+            // 
+            this.SizeTextBox.Location = new System.Drawing.Point(697, 238);
+            this.SizeTextBox.Name = "SizeTextBox";
+            this.SizeTextBox.Size = new System.Drawing.Size(51, 27);
+            this.SizeTextBox.TabIndex = 26;
+            // 
+            // SizecomboBox
+            // 
+            this.SizecomboBox.FormattingEnabled = true;
+            this.SizecomboBox.Location = new System.Drawing.Point(648, 237);
+            this.SizecomboBox.Name = "SizecomboBox";
+            this.SizecomboBox.Size = new System.Drawing.Size(42, 28);
+            this.SizecomboBox.TabIndex = 27;
+            // 
+            // BoltcheckBox1
+            // 
+            this.BoltcheckBox1.AutoSize = true;
+            this.BoltcheckBox1.Location = new System.Drawing.Point(646, 270);
+            this.BoltcheckBox1.Name = "BoltcheckBox1";
+            this.BoltcheckBox1.Size = new System.Drawing.Size(101, 24);
+            this.BoltcheckBox1.TabIndex = 28;
+            this.BoltcheckBox1.Text = "Жирность";
+            this.BoltcheckBox1.UseVisualStyleBackColor = true;
+            // 
+            // ItaliancheckBox2
+            // 
+            this.ItaliancheckBox2.AutoSize = true;
+            this.ItaliancheckBox2.Location = new System.Drawing.Point(646, 300);
+            this.ItaliancheckBox2.Name = "ItaliancheckBox2";
+            this.ItaliancheckBox2.Size = new System.Drawing.Size(83, 24);
+            this.ItaliancheckBox2.TabIndex = 29;
+            this.ItaliancheckBox2.Text = "Наклон";
+            this.ItaliancheckBox2.UseVisualStyleBackColor = true;
+            // 
+            // ColorButton
+            // 
+            this.ColorButton.Location = new System.Drawing.Point(641, 330);
+            this.ColorButton.Name = "ColorButton";
+            this.ColorButton.Size = new System.Drawing.Size(107, 31);
+            this.ColorButton.TabIndex = 30;
+            this.ColorButton.Text = "Цвет";
+            this.ColorButton.UseVisualStyleBackColor = true;
+            this.ColorButton.Click += new System.EventHandler(this.ColorButton_Click);
+            // 
+            // FilterButton
+            // 
+            this.FilterButton.Location = new System.Drawing.Point(601, 367);
+            this.FilterButton.Name = "FilterButton";
+            this.FilterButton.Size = new System.Drawing.Size(147, 27);
+            this.FilterButton.TabIndex = 31;
+            this.FilterButton.Text = "Фильтровать";
+            this.FilterButton.UseVisualStyleBackColor = true;
+            this.FilterButton.Click += new System.EventHandler(this.FilterButton_Click);
+            // 
+            // ClearFilterButton
+            // 
+            this.ClearFilterButton.Location = new System.Drawing.Point(596, 400);
+            this.ClearFilterButton.Name = "ClearFilterButton";
+            this.ClearFilterButton.Size = new System.Drawing.Size(152, 30);
+            this.ClearFilterButton.TabIndex = 32;
+            this.ClearFilterButton.Text = "Удалить фильтры";
+            this.ClearFilterButton.UseVisualStyleBackColor = true;
+            this.ClearFilterButton.Click += new System.EventHandler(this.ClearFilterButton_Click);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(601, 187);
+            this.label5.Location = new System.Drawing.Point(585, 197);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 20);
-            this.label5.TabIndex = 25;
-            this.label5.Text = "Тексты";
+            this.label5.Size = new System.Drawing.Size(57, 20);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "Шрифт";
             // 
-            // deleteTextButton
+            // label6
             // 
-            this.deleteTextButton.Location = new System.Drawing.Point(600, 320);
-            this.deleteTextButton.Name = "deleteTextButton";
-            this.deleteTextButton.Size = new System.Drawing.Size(151, 29);
-            this.deleteTextButton.TabIndex = 26;
-            this.deleteTextButton.Text = "Удаление текста";
-            this.deleteTextButton.UseVisualStyleBackColor = true;
-            this.deleteTextButton.Click += new System.EventHandler(this.deleteTextButton_Click);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(582, 239);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(60, 20);
+            this.label6.TabIndex = 34;
+            this.label6.Text = "Размер";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(642, 171);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(71, 20);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "Фильтры";
             // 
             // Form1
             // 
@@ -261,13 +318,19 @@ namespace _6_лаба
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.deleteTextButton);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.ClearFilterButton);
+            this.Controls.Add(this.FilterButton);
+            this.Controls.Add(this.ColorButton);
+            this.Controls.Add(this.ItaliancheckBox2);
+            this.Controls.Add(this.BoltcheckBox1);
+            this.Controls.Add(this.SizecomboBox);
+            this.Controls.Add(this.SizeTextBox);
+            this.Controls.Add(this.FamilyTextBox);
             this.Controls.Add(this.deletefontButton);
-            this.Controls.Add(this.comboText);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.button4);
@@ -303,13 +366,20 @@ namespace _6_лаба
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboText;
         private System.Windows.Forms.Button deletefontButton;
+        private System.Windows.Forms.TextBox FamilyTextBox;
+        private System.Windows.Forms.TextBox SizeTextBox;
+        private System.Windows.Forms.ComboBox SizecomboBox;
+        private System.Windows.Forms.CheckBox BoltcheckBox1;
+        private System.Windows.Forms.CheckBox ItaliancheckBox2;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Button ColorButton;
+        private System.Windows.Forms.Button FilterButton;
+        private System.Windows.Forms.Button ClearFilterButton;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button deleteTextButton;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }
 
