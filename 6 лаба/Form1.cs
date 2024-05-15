@@ -482,6 +482,12 @@ namespace _6_лаба
                                 richTextBox1.Focus();
                                 return;
                             }
+                        if (!File.Exists(filePath))
+                        {
+                            listfont.Clear();
+                            comboBox2.Items.Clear();
+                            File.WriteAllText(filePath, firstLine);
+                        }
                         using (OleDbConnection connection = new OleDbConnection(connectionString))
                         {
                             connection.Open();
@@ -712,6 +718,11 @@ namespace _6_лаба
         {
             try
             {
+                if (comboBox2.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Стиль не выбран");
+                    return;
+                }
                 int id = listfont[comboBox2.SelectedIndex].id;
                 /* using (OleDbConnection connection = new OleDbConnection(connectionString))
                  {
@@ -811,7 +822,9 @@ namespace _6_лаба
             {
                 if (!File.Exists(filePath))
                 {
-                    File.WriteAllText(filePath, firstLine);
+                    //  File.WriteAllText(filePath, firstLine);
+                    MessageBox.Show("Файл не найден");
+                    return;
                 }
                 else
                 {
